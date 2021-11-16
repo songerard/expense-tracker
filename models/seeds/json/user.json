@@ -1,0 +1,14 @@
+[
+  {
+    "id": 1,
+    "displayName": "廣志",
+    "loginName": "user1",
+    "password": "12345678"
+  },
+  {
+    "id": 2,
+    "displayName": "小新",
+    "loginName": "user2",
+    "password": "12345678"
+  }
+]
