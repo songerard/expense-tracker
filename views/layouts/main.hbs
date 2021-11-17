@@ -25,6 +25,11 @@
         <li class="nav-item">
           <a class="nav-link" href="#">Reports</a>
         </li>
+        {{#if isAuthenticated}}
+        <li class="nav-item">
+          <a href="/users/logout" class="nav-link text-danger">Logout</a>
+        </li>
+        {{/if}}
       </ul>
     </div>
   </nav>
