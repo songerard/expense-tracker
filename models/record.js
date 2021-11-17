@@ -1,6 +1,9 @@
 const mongoose = require('mongoose')
 const category = require('./category')
 const Schema = mongoose.Schema
+const autoIncrement = require('mongoose-auto-increment')
+const db = require('../config/mongoose')
+autoIncrement.initialize(db)
 
 // set record schema
 const RecordSchema = new Schema({
@@ -49,4 +52,9 @@ RecordSchema.virtual('categoryName', {
   justOne: true
 })
 
+RecordSchema.plugin(autoIncrement.plugin, {
+  model: 'Record',
+  field: 'id',
+  startAt: 1
+})
 module.exports = mongoose.model('Record', RecordSchema)

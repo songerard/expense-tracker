@@ -2,16 +2,16 @@
   <div class="col-md-6 m-auto">
     <div class="card card-body">
       <h1 class="text-center mt-3">Register</h1>
-      {{!-- {{> message }} --}}
+      {{> message }}
       <form action="/users/register" method="POST">
         <div class="form-group">
-          <label for="name">Display Name</label>
-          <input type="text" id="name" name="displayName" class="form-control" placeholder="Enter Name"
+          <label for="displayName">Display Name</label>
+          <input type="text" id="displayName" name="displayName" class="form-control" placeholder="Enter Name"
             value="{{ displayName }}">
         </div>
         <div class="form-group">
-          <label for="name">Login Name</label>
-          <input type="text" id="name" name="loginName" class="form-control" placeholder="Enter Name"
+          <label for="loginName">Login Name</label>
+          <input type="text" id="loginName" name="loginName" class="form-control" placeholder="Enter Name"
             value="{{ loginName }}">
         </div>
         <div class="form-group">
