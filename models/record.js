@@ -38,14 +38,14 @@ const RecordSchema = new Schema({
   })
 
 // get user display name and category name through populate virtuals
-RecordSchema.virtual('userDisplayName', {
+RecordSchema.virtual('user', {
   ref: 'User',
   localField: 'userId',
   foreignField: 'id',
   justOne: true
 })
 
-RecordSchema.virtual('categoryName', {
+RecordSchema.virtual('category', {
   ref: 'Category',
   localField: 'categoryId',
   foreignField: 'id',

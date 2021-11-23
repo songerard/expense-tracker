@@ -29,6 +29,7 @@ app.use((req, res, next) => {
   res.locals.password = req.flash('password')
   next()
 })
+app.use(express.static('public'))
 app.use(routes)
 
 

@@ -1,1 +1,79 @@
-index.hbs
+<div class="container">
+  <div class="row mt-5">
+    <div class="col-6">
+      <div class="form-group">
+        <select class="filter-form form-control" id="categorySelect">
+          <option selected disabled>類別...</option>
+          <option value="all">全部</option>
+          {{#each uniqueCategoryList}}
+          <option value="{{ this.categoryId }}">{{ this.categoryName }}</option>
+          {{/each}}
+        </select>
+      </div>
+    </div>
+  </div>
+  <div class="row mt-2">
+    <div class="col-2">
+      <p>總金額：</p>
+    </div>
+    <div class="col-4">
+      <p class="h1 text-danger">{{ totalAmount }}</p>
+    </div>
+  </div>
+  {{#each records}}
+  <div class="row mt-2">
+    <div class="item-row col-6 d-flex align-items-center">
+      <i class="text-primary m-2 fa-2x {{ this.category.icon }}" style="width: 40px;"></i>
+      <div class="m-2">
+        <div>
+          <p class="h4 mb-0">{{ this.name }}</p>
+        </div>
+        <div>
+          <p class="h6 text-secondary">{{ this.date }}</p>
+        </div>
+      </div>
+      <p class="h4 ml-auto mr-3 my-2">{{ this.amount }}</p>
+    </div>
+    <div class="d-flex align-items-center ml-4">
+      <a href="/expenses/{{ this.id }}/edit"><i class="text-success fa-lg far fa-edit"></i></a>
+    </div>
+    <div class="d-flex align-items-center mx-4">
+      <button class="btn btn-link delete-btn"><i class="text-danger fa-lg far fa-trash-alt" data-toggle="modal"
+          data-target="#deleteModal" data-id="{{ this.id }}" data-name="{{ this.name }}"
+          data-amount="{{ this.amount }}"></i></button>
+    </div>
+  </div>
+  {{/each}}
+  <div class="row mt-2">
+    <div class="col-6 mt-3 mx-auto">
+      <button class="btn btn-success">新增支出</button>
+    </div>
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="ModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title text-danger" id="ModalLabel">確認刪除</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <!-- render by js -->
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">返回</button>
+        <form action="<!-- render by js -->" method="POST" style="display: inline;" class="delete-form">
+          <button type="submit" class="btn btn-danger">確認刪除</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<script src="/javascripts/modal.js"></script>
+<script src="/javascripts/home.js"></script>
