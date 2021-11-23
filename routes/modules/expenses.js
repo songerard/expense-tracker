@@ -43,7 +43,7 @@ router.post('/', (req, res) => {
     categoryId
   })
     .then(() => res.redirect('/'))
-    .catch(error => console.error(error))
+    .catch(err => console.log(err))
 })
 
 // edit expense page
@@ -71,7 +71,7 @@ router.get('/:id/edit', (req, res) => {
       // console.log(allCategories.id)
       res.render('edit', { record, allCategories })
     })
-    .catch(error => console.error(error))
+    .catch(err => console.log(err))
 })
 
 // edit expense
@@ -84,7 +84,17 @@ router.put('/:id', (req, res) => {
       record.save()
     })
     .then(() => res.redirect('/'))
-    .catch(error => console.log(error))
+    .catch(err => console.log(err))
+})
+
+// delete record
+router.delete('/:id', (req, res) => {
+  const userId = req.user.id
+  const id = req.params.id
+  Record.findOne({ id, userId })
+    .then(record => record.remove())
+    .then(() => res.redirect('/'))
+    .catch(err => console.log(err))
 })
 
 module.exports = router
