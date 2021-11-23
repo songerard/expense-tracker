@@ -7,16 +7,19 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Expense Tracker</title>
   <script src="https://kit.fontawesome.com/2e8a8ca071.js" crossorigin="anonymous"></script>
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css"
     integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
+  <script src="https://unpkg.com/gijgo@1.9.13/js/gijgo.min.js" type="text/javascript"></script>
+  <link href="https://unpkg.com/gijgo@1.9.13/css/gijgo.min.css" rel="stylesheet" type="text/css" />
 </head>
 
 <body>
-  <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand font-weight-bold" href="#">家用記帳本</a>
-        {{#if isAuthenticated}}
-          <a href="/users/logout" class="nav-link btn btn-sm btn-warning">登出</a>
-        {{/if}}
+  <nav class="navbar navbar-light bg-light">
+    <a class="navbar-brand font-weight-bold" href="/">家用記帳本</a>
+    {{#if isAuthenticated}}
+    <a href="/users/logout" class="nav-link btn btn-sm btn-warning">登出</a>
+    {{/if}}
   </nav>
 
   {{{ body }}}

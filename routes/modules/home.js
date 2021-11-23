@@ -7,7 +7,9 @@ let uniqueCategoryList = []
 
 // home page
 router.get('/', (req, res) => {
+  // const userId = 1
   const userId = req.user.id
+  uniqueCategoryList = []
   Record.find({ userId })
     .lean()
     .populate('category')
@@ -42,6 +44,7 @@ router.get('/', (req, res) => {
 // filter expenses
 router.get('/filter/:categoryId', (req, res) => {
   const categoryId = req.params.categoryId
+  // const userId = 1
   const userId = req.user.id
 
   if (categoryId === 'all') {
@@ -70,7 +73,9 @@ router.get('/filter/:categoryId', (req, res) => {
 
 
 function uniqueObjArray(array) {
-  return [...new Map(array.map((item) => [item["categoryId"], item])).values(),]
+  array = [...new Map(array.map((item) => [item["categoryId"], item])).values(),]
+  arrary = array.sort((a, b) => a.categoryId - b.categoryId)
+  return array
 }
 
 function sumTotalOfDb(records) {

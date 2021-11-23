@@ -1,0 +1,51 @@
+<div class="container">
+  <form action="/expenses" method="POST" class="mt-5">
+    <div class="form-group row">
+      <label for="staticHeading" class="col-sm-2 col-form-label">*必填</label>
+      <div class="col-sm-5">
+        <input type="text" readonly class="form-control-plaintext" id="staticHeading" value="請輸入你的開支">
+      </div>
+    </div>
+    <div class="form-group row">
+      <label for="inputName" class="col-sm-2 col-form-label">名稱 *：</label>
+      <div class="col-sm-5">
+        <input type="text" class="form-control" id="inputName" name="name">
+      </div>
+    </div>
+    <div class="form-group row">
+      <label for="inputDate" class="col-sm-2 col-form-label">日期 *：</label>
+      <div class="col-sm-5">
+        <input name="date" id="datepicker" width="276" />
+      </div>
+    </div>
+    <div class="form-group row">
+      <label for="inputCategory" class="col-sm-2 col-form-label">類別 *：</label>
+      <div class="col-sm-5">
+        <select class="form-control" id="inputCategory" name="categoryId">
+          <option selected disabled>類別...</option>
+          {{#each categories}}
+          <option value="{{ this.id }}">{{ this.name }}</option>
+          {{/each}}
+        </select>
+      </div>
+    </div>
+    <div class="form-group row">
+      <label for="inputAmount" class="col-sm-2 col-form-label">金額 *：</label>
+      <div class="col-sm-5">
+        <input type="text" class="form-control" id="inputAmount" name="amount">
+      </div>
+    </div>
+    <div class="form-group row">
+      <div class="col-sm-2"></div>
+      <div class="col-sm-5">
+        <button type="submit" class="btn btn-success">新增開支</button>
+      </div>
+    </div>
+  </form>
+</div>
+
+<script>
+  $('#datepicker').datepicker({
+    uiLibrary: 'bootstrap4'
+  });
+</script>
