@@ -12,7 +12,6 @@ const expenses = require('./modules/expenses')
 router.use('/users', users)
 router.use('/expenses', authenticator, expenses)
 router.use('/', authenticator, home)
-// router.use('/', home)
 
 
 

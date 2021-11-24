@@ -66,9 +66,11 @@ router.get('/:id/edit', (req, res) => {
     .then(record => {
       // render edit page and set restaurant's current category as default
       recordCategoryId = record.categoryId
-      record.date = record.date.toDateString()
-      // console.log(record.categoryId)
-      // console.log(allCategories.id)
+      record.date = record.date.toLocaleDateString('en-US', {
+        day: '2-digit',
+        month: '2-digit',
+        year: 'numeric',
+      })
       res.render('edit', { record, allCategories })
     })
     .catch(err => console.log(err))

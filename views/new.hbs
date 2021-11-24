@@ -1,5 +1,5 @@
 <div class="container">
-  <form action="/expenses" method="POST" class="mt-5">
+  <form action="/expenses" method="POST" class="mt-5 needs-validation" novalidate>
     <div class="form-group row">
       <label for="staticHeading" class="col-sm-2 col-form-label">*必填</label>
       <div class="col-sm-5">
@@ -9,30 +9,39 @@
     <div class="form-group row">
       <label for="inputName" class="col-sm-2 col-form-label">名稱 *：</label>
       <div class="col-sm-5">
-        <input type="text" class="form-control" id="inputName" name="name">
+        <input type="text" class="form-control" id="inputName" name="name" required pattern=".*\S+.*">
+        <div class="invalid-feedback">
+          請輸入有效資料
+        </div>
       </div>
     </div>
     <div class="form-group row">
       <label for="inputDate" class="col-sm-2 col-form-label">日期 *：</label>
       <div class="col-sm-5">
-        <input name="date" id="datepicker" width="276" />
+        <input placeholder="mm/dd/yyyy" name="date" required id="datepicker" width="276" />
       </div>
     </div>
     <div class="form-group row">
       <label for="inputCategory" class="col-sm-2 col-form-label">類別 *：</label>
       <div class="col-sm-5">
-        <select class="form-control" id="inputCategory" name="categoryId">
-          <option selected disabled>類別...</option>
+        <select class="form-control" id="inputCategory" name="categoryId" required>
+          <option selected disabled hidden value="">類別...</option>
           {{#each categories}}
           <option value="{{ this.id }}">{{ this.name }}</option>
           {{/each}}
         </select>
+        <div class="invalid-feedback">
+          請選取類別
+        </div>
       </div>
     </div>
     <div class="form-group row">
       <label for="inputAmount" class="col-sm-2 col-form-label">金額 *：</label>
       <div class="col-sm-5">
-        <input type="text" class="form-control" id="inputAmount" name="amount">
+        <input type="number" min="1" class="form-control" id="inputAmount" name="amount" required>
+        <div class="invalid-feedback">
+          請輸入有效資料
+        </div>
       </div>
     </div>
     <div class="form-group row">
@@ -50,3 +59,4 @@
     uiLibrary: 'bootstrap4'
   });
 </script>
+<script src="/javascripts/validation.js"></script>

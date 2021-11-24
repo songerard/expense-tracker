@@ -1,5 +1,5 @@
 <div class="container">
-  <form action="/expenses/{{ record.id }}?_method=PUT" method="POST" class="mt-5">
+  <form action="/expenses/{{ record.id }}?_method=PUT" method="POST" class="mt-5 needs-validation" novalidate>
     <div class="form-group row">
       <label for="staticHeading" class="col-sm-2 col-form-label">*必填</label>
       <div class="col-sm-5">
@@ -9,7 +9,11 @@
     <div class="form-group row">
       <label for="inputName" class="col-sm-2 col-form-label">名稱 *：</label>
       <div class="col-sm-5">
-        <input type="text" class="form-control" id="inputName" name="name" value="{{ record.name }}">
+        <input type="text" class="form-control" id="inputName" name="name" value="{{ record.name }}" required
+          pattern=".*\S+.*">
+        <div class="invalid-feedback">
+          請輸入有效資料
+        </div>
       </div>
     </div>
     <div class="form-group row">
@@ -21,17 +25,24 @@
     <div class="form-group row">
       <label for="inputCategory" class="col-sm-2 col-form-label">類別 *：</label>
       <div class="col-sm-5">
-        <select class="form-control" id="inputCategory" name="categoryId">
+        <select class="form-control" id="inputCategory" name="categoryId" required>
           {{#each allCategories}}
           <option value="{{ this.id }}" {{#if_eq this.id }}selected{{/if_eq}}>{{ this.name }}</option>
           {{/each}}
         </select>
+        <div class="invalid-feedback">
+          請選取類別
+        </div>
       </div>
     </div>
     <div class="form-group row">
       <label for="inputAmount" class="col-sm-2 col-form-label">金額 *：</label>
       <div class="col-sm-5">
-        <input type="text" class="form-control" id="inputAmount" name="amount" value="{{ record.amount }}">
+        <input type="number" min="1" class="form-control" id="inputAmount" name="amount" value="{{ record.amount }}"
+          required>
+        <div class="invalid-feedback">
+          請輸入有效資料
+        </div>
       </div>
     </div>
     <div class="form-group row">
@@ -49,3 +60,4 @@
     uiLibrary: 'bootstrap4'
   });
 </script>
+<script src="/javascripts/validation.js"></script>

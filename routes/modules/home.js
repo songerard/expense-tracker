@@ -7,7 +7,6 @@ let uniqueCategoryList = []
 
 // home page
 router.get('/', (req, res) => {
-  // const userId = 1
   const userId = req.user.id
   uniqueCategoryList = []
   Record.find({ userId })
@@ -44,7 +43,6 @@ router.get('/', (req, res) => {
 // filter expenses
 router.get('/filter/:categoryId', (req, res) => {
   const categoryId = req.params.categoryId
-  // const userId = 1
   const userId = req.user.id
 
   if (categoryId === 'all') {
