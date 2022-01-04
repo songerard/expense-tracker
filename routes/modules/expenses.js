@@ -27,36 +27,26 @@ router.get('/new', (req, res) => {
 
 // add new expense into mongodb
 router.post('/', (req, res) => {
-  const userId = req.user.id
-  let {
-    name,
-    date,
-    amount,
-    categoryId
-  } = req.body
-
-  Record.create({
-    name,
-    date,
-    amount,
-    userId,
-    categoryId
-  })
+  req.body.userId = req.user.id
+  const newExpense = new Record(req.body)
+  newExpense.save()
     .then(() => res.redirect('/'))
     .catch(err => console.log(err))
 })
 
 // edit expense page
 router.get('/:id/edit', (req, res) => {
+  // get all category before render edit page
   let allCategories = []
-  Category.find()
-    .sort({ 'id': 'asc' })
-    .lean()
-    .then(categories => {
-      allCategories = categories
-    })
-    .catch(err => console.log(err))
 
+  const getAllCategory = async () => {
+    allCategories = await Category.find()
+      .lean()
+    return allCategories
+  }
+  getAllCategory()
+
+  // render edit page  
   const id = req.params.id
   const userId = req.user.id
 
