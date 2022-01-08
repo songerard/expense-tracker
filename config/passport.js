@@ -1,5 +1,6 @@
 const passport = require('passport')
 const LocalStrategy = require('passport-local').Strategy
+const FacebookStrategy = require('passport-facebook').Strategy
 const User = require('../models/user')
 const bcrypt = require('bcryptjs')
 
@@ -36,6 +37,34 @@ module.exports = app => {
       .catch(err => done(err))
   }))
 
+  // Configuration FacebookStrategy
+  passport.use(new FacebookStrategy({
+    clientID: process.env.FACEBOOK_ID,
+    clientSecret: process.env.FACEBOOK_SECRET,
+    callbackURL: process.env.FACEBOOK_CALLBACK,
+    profileFields: ['email', 'displayName']
+  }, (accessToken, refreshToken, profile, done) => {
+    const displayName = profile._json.name
+    const loginName = profile._json.email
+    // const { displayName: name, loginName: email } = profile._json
+    User.findOne({ loginName })
+      .then(user => {
+        if (user) return done(null, user)
+
+        const randomPassword = Math.random().toString(36).slice(-8)
+        bcrypt
+          .genSalt(10)
+          .then(salt => bcrypt.hash(randomPassword, salt))
+          .then(hash => User.create({
+            displayName,
+            loginName,
+            password: hash
+          }))
+          .then(user => done(null, user))
+          .catch(err => done(err, false))
+      })
+      .catch(err => done(err))
+  }))
 
   // serialize and deserialize user instances to and from the session
   passport.serializeUser((user, done) => {
