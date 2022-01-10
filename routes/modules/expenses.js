@@ -15,14 +15,15 @@ hbs.handlebars.registerHelper('if_eq', function (a, options) {
 })
 
 // create new expense page
-router.get('/new', (req, res) => {
+router.get('/new', (req, res, next) => {
   Category.find()
     .sort({ 'id': 'asc' })
     .lean()
     .then(categories => {
       res.render('new', { categories })
     })
-    .catch(err => console.log(err))
+    // .catch(err => console.log(err))
+    .catch(next)
 })
 
 // add new expense into mongodb
@@ -31,7 +32,8 @@ router.post('/', (req, res) => {
   const newExpense = new Record(req.body)
   newExpense.save()
     .then(() => res.redirect('/'))
-    .catch(err => console.log(err))
+    // .catch(err => console.log(err))
+    .catch(next)
 })
 
 // edit expense page
@@ -42,7 +44,8 @@ router.get('/:id/edit', (req, res) => {
   const getAllCategory = async () => {
     allCategories = await Category.find()
       .lean()
-      .catch(err => console.log(err))
+      // .catch(err => console.log(err))
+      .catch(next)
     return allCategories
   }
   getAllCategory()
@@ -64,7 +67,8 @@ router.get('/:id/edit', (req, res) => {
       })
       res.render('edit', { record, allCategories })
     })
-    .catch(err => console.log(err))
+    // .catch(err => console.log(err))
+    .catch(next)
 })
 
 // edit expense
@@ -77,7 +81,8 @@ router.put('/:id', (req, res) => {
       record.save()
     })
     .then(() => res.redirect('/'))
-    .catch(err => console.log(err))
+    // .catch(err => console.log(err))
+    .catch(next)
 })
 
 // delete record
@@ -87,7 +92,8 @@ router.delete('/:id', (req, res) => {
   Record.findOne({ id, userId })
     .then(record => record.remove())
     .then(() => res.redirect('/'))
-    .catch(err => console.log(err))
+    // .catch(err => console.log(err))
+    .catch(next)
 })
 
 module.exports = router

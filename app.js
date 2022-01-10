@@ -38,6 +38,12 @@ app.use((req, res, next) => {
 app.use(express.static('public'))
 app.use(routes)
 
+// error handler
+app.use(function (err, req, res, next) {
+  console.error(err.stack)
+  // res.status(500).send('Something broke!')
+  res.render('error')
+})
 
 const PORT = process.env.PORT
 app.listen(PORT, () => {
