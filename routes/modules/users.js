@@ -53,6 +53,7 @@ router.post('/register', (req, res) => {
         .then(() => res.redirect('/users/login'))
         .catch(err => console.log(err))
     })
+    .catch(err => console.log(err))
 })
 
 // logout

@@ -42,6 +42,7 @@ router.get('/:id/edit', (req, res) => {
   const getAllCategory = async () => {
     allCategories = await Category.find()
       .lean()
+      .catch(err => console.log(err))
     return allCategories
   }
   getAllCategory()
